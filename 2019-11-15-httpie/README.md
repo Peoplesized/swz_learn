@@ -21,7 +21,18 @@
 * Httpie commmands are structured as follows 
 
     `http [flags] [METHOD] URL [ITEM [ITEM]]`
+* Request data fields can be serialized as a JSON object using the syntax
 
+     - `field=@file.txt` (serializes the contents of file.txt to a JSON object and assigns the result to field)
+
+
+* A request can be sent with HTTP Headers as follows  Name:Value e.g 	
+  - `http POST  api_key: abcd http://httbin.org/anything -d @basic.json`
+  - Its worth noting that the header will be returned as Api-Key: "abcd"
+
+* A json file can be assigned to a variable as follows
+    - `http POST  http://httpbin.org/anything api_key:abcd value:=@basic.json`
+    
 - More info about httpie can be found on  [HTTPie – command line HTTP client](https://httpie.org/)
 
 
@@ -44,6 +55,8 @@
 * An equivalent cURL request for the above httpie request
 
   - `curl -X POST  http://httbin.org/anything -d @basic.json`
+
+
 
   
 
