@@ -14,4 +14,5 @@
     * Read on pomodoro technique
     * Review swz_learn
     * Read on Quantum computing
+    * Documented today's learn session
 
