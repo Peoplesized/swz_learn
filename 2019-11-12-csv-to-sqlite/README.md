@@ -13,8 +13,12 @@
 
 •  csv-to-sqlite creates tables named after the filename by default. 
 
+<<<<<<< HEAD
 • SQLite must be installed in the working environment 
 inorder to execute quiries in the generate sqlite database.
+=======
+• SQLite must be installed in the working environment inorder to execute quiries in the generate sqlite database.
+>>>>>>> refs/heads/feature/2019-11-22-pomodoro-and-stuff
 
 • To open sqlite from the cmd you type `sqlite`.
 
@@ -24,16 +28,18 @@ inorder to execute quiries in the generate sqlite database.
 
     `.open bwa.non-default.records.db`
 
-• SQL querries can now be executed.\
+• SQL querries can now be executed.
+
 • In our case we wanted the list of all unique usernames so we executed
 
     `select DISTINCT username from `bwa.non-default.records``
 
-•	To print the results of a query to a csv file, we type the following commands in succession. \
-    • `.mode csv` \
-    • `.output <output-filename>` \
-    •  `<sql_query>`\
-    • `.quit` \
+•	To print the results of a query to a csv file, we type the following commands in succession. 
+
+    • `.mode csv` 
+    • `.output <output-filename>` 
+    •  `<sql_query>`
+    • `.quit` 
 
 • In our case we executed 
 

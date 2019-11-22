@@ -1,6 +1,7 @@
+## 2019-11-11 Makefiles Instructions
 [gift.mavuso](twist-mention://326044) and [manqoba.sukati](twist-mention://303090) why not take a look at `makefile` this morning?
 
-Look at http://makefiletutorial.com/.
+Look at http://makefiletutoria`l.com/.
 
 You might be surprised at what it can do…
 
