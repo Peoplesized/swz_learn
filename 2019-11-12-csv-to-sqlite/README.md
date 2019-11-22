@@ -11,10 +11,15 @@
 
     `csv-to-sqlite -f bwa.non-default.records.csv -o bwa.non-default.records.db` 
 
-•  csv-to-sqlite creates tables named after the filename by default. \
-• SQLite must be installed in the working environment inorder to execute quiries in the generate sqlite database.\
-• To open sqlite from the cmd you type `sqlite`.\
-• To open sqlite database files we simply type `.open <db-filename>`. \
+•  csv-to-sqlite creates tables named after the filename by default. 
+
+• SQLite must be installed in the working environment 
+inorder to execute quiries in the generate sqlite database.
+
+• To open sqlite from the cmd you type `sqlite`.
+
+• To open sqlite database files we simply type `.open <db-filename>`. 
+
 • In our case we executed 
 
     `.open bwa.non-default.records.db`
