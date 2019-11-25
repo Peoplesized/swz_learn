@@ -38,3 +38,8 @@
     .tables
 
         shows all tables in database.
+
+    .header on
+
+        shows column names
+
