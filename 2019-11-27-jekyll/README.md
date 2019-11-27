@@ -15,11 +15,12 @@
 * To add a page, simply add a `<file-name>.markdown` file in the `<site-name>` directory.
 
 * To add a collection, add
-
-    `collections:`
-        `team_members:`
-           `output: true`
-            `permalink: /:collection/:name`
+```
+    collections:
+        team_members:
+            output: true
+            permalink: /:collection/:name
+```
 
   to the the _config.yml file
 
@@ -32,4 +33,3 @@
 * To check where it is installed, run the following command:
 
     `which ruby`
-    
