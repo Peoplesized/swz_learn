@@ -4,7 +4,9 @@ const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
 const program = require('commander');
-const fs = require('fs')
+const fs = require('fs');
+
+const eh = require('./error_handler.js')
 
 function show_banner() {
   clear();
@@ -19,22 +21,13 @@ function show_keys(level){
 }
 
 function describe(file){
-  let obj;
-  try {
-    obj = fs.readFileSync(file,'utf8')
-  } catch (e) {
-    console.error('The file you specified does not exist')
-    return
-  }
 
-  let json_obj;
-  try {
-    json_obj = JSON.parse(obj);
-  } catch(e) {
-    console.error('Could not parse input as json')
-    return
+  if(eh.check_file_existence(file)) {
+    let f =  fs.readFileSync(file,'utf8');
+    if(eh.check_json_validity(f)){
+      let obj = JSON.parse(f)
+    }
   }
-  console.log(json_obj)
 }
 
 program
