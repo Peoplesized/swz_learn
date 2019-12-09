@@ -33,22 +33,4 @@ program
     show_banner();
   });
 
-program
-  .option('--say-hello')
-  .alias('-sh')
-  .description('Print hello')
-  .action(() => {
-    say_hello();
-  });
-
-program
-  .option('--describe')
-  .alias('-d')
-  .description('specify input <json>')
-  .action((input) => {
-    describe(input);
-  });
-
-
-
 program.parse(process.argv);
