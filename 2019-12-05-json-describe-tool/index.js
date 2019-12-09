@@ -11,6 +11,19 @@ const show_banner = () => {
     )
   );
 }
+function show_keys(level){
+   console.log('levels')
+}
+
+function describe(file){
+  let obj = fs.readFileSync(file,'utf8', (err, data) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+  })
+  console.log(obj)
+}
 
 program
   .version('0.0.1')
