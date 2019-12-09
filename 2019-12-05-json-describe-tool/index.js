@@ -19,13 +19,22 @@ function show_keys(level){
 }
 
 function describe(file){
-  let obj = fs.readFileSync(file,'utf8', (err, data) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-  })
-  console.log(obj)
+  let obj;
+  try {
+    obj = fs.readFileSync(file,'utf8')
+  } catch (e) {
+    console.error('The file you specified does not exist')
+    return
+  }
+
+  let json_obj;
+  try {
+    json_obj = JSON.parse(obj);
+  } catch(e) {
+    console.error('Could not parse input as json')
+    return
+  }
+  console.log(json_obj)
 }
 
 program
