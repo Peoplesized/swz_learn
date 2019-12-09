@@ -12,15 +12,6 @@ const show_banner = () => {
   );
 }
 
-const say_hello = () => {
-  console.info('Hello');
-};
-
-const describe = (obj) => {
-  console.log(obj)
-  //console.log(`${typeof obj}${obj}`);
-};
-
 program
   .version('0.0.1')
   .description('A CLI tool for describing JSON');
