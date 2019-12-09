@@ -1,9 +1,12 @@
+#!/usr/bin/env node
+
 const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
 const program = require('commander');
+const fs = require('fs')
 
-const show_banner = () => {
+function show_banner() {
   clear();
   console.log(
     chalk.yellow(
@@ -27,14 +30,18 @@ function describe(file){
 
 program
   .version('0.0.1')
-  .description('A CLI tool for describing JSON');
+  .description('A CLI tool for describing JSON')
 
 program
-  .option('--banner')
+  .option('-b, --banner', 'Print banner', show_banner)
   .alias('-b')
-  .description('Print banner')
-  .action(() => {
-    show_banner();
-  });
+
+program
+  .option('-i, --input <json file>', 'specify input file', describe)
+  .alias('-i')
+
+program
+  .option('-l, --level <level>', 'show keys of json object', show_keys)
+  .alias('-l')
 
 program.parse(process.argv);
