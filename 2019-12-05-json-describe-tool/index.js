@@ -20,14 +20,26 @@ function show_keys(level){
    console.log('levels')
 }
 
-function describe(file){
-
+function readFile(file){
   if(eh.check_file_existence(file)) {
-    let f =  fs.readFileSync(file,'utf8');
-    if(eh.check_json_validity(f)){
-      let obj = JSON.parse(f)
-    }
+    return fs.readFileSync(file,'utf8');
   }
+  return;
+}
+
+function readJSON(f){
+  if(eh.check_json_validity(f)){
+    return JSON.parse(f);
+  }
+  return;
+}
+
+
+
+function main(file){
+  let f = readFile(file);
+  let json = readJSON(f);
+  console.log(json);
 }
 
 program
@@ -39,7 +51,7 @@ program
   .alias('-b')
 
 program
-  .option('-i, --input <json file>', 'specify input file', describe)
+  .option('-i, --input <json file>', 'specify input file', main)
   .alias('-i')
 
 program
