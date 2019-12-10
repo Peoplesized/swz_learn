@@ -6,7 +6,9 @@ const figlet = require('figlet');
 const program = require('commander');
 const fs = require('fs');
 
+
 const eh = require('./error_handler.js')
+const ds = require('./describe.js')
 
 function show_banner() {
   clear();
@@ -17,7 +19,8 @@ function show_banner() {
   );
 }
 function show_keys(level){
-   console.log('levels')
+  
+   return level;
 }
 
 function readFile(file){
@@ -36,10 +39,10 @@ function readJSON(f){
 
 
 
-function main(file){
+function load(file){
   let f = readFile(file);
   let json = readJSON(f);
-  console.log(json);
+  return json;
 }
 
 program
@@ -51,11 +54,18 @@ program
   .alias('-b')
 
 program
-  .option('-i, --input <json file>', 'specify input file', main)
+  .option('-i, --input <json file>', 'specify input file', load)
   .alias('-i')
+
+
 
 program
   .option('-l, --level <level>', 'show keys of json object', show_keys)
   .alias('-l')
 
 program.parse(process.argv);
+
+if(program.input){
+    ds.describe(program.input,program.level);
+}
+
