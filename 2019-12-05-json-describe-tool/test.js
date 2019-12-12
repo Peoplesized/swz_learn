@@ -17,9 +17,9 @@ var obj = {
   }
 //return all keys in an object
 var level_count =  0;
-
+var test = []
 function getKeys(obj) {
-    var all = {};
+    var all = {}; 
     var seen = [];
     checkValue(obj, all, seen);
     return Object.keys(all);
@@ -40,7 +40,6 @@ function getKeys(obj) {
     if (seen.indexOf(obj) >= 0) return;
     seen.push(obj);
     var keys = Object.keys(obj);
-    level_count += level_count;
     for (var i = 0, l = keys.length; i < l; i++) {
       var key = keys[i];
       all[key] = true;
@@ -48,14 +47,12 @@ function getKeys(obj) {
     }
   }
   
-  var result = getKeys(obj);
-  console.log(result,level_count);
 
   function iterate(obj, stack) {
+    test.push(Object.keys(obj))
     for (var property in obj) {
         if (obj.hasOwnProperty(property)) {
             if (typeof obj[property] == "object") {
-                console.log(property)
                 iterate(obj[property], stack + '.' + property);
             }
              else {
@@ -64,6 +61,10 @@ function getKeys(obj) {
         }
     }
 }
+function myOwnKeys(obj){
+  return Object.keys(obj)
+}
 
-iterate(object, '')
+var keys = iterate(obj)
+console.log(test)
 
