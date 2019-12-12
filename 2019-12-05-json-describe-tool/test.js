@@ -2,6 +2,14 @@
 var buckets = require('buckets-js');
 var obj = {
   "personal_details": {
+    "name": "Manqoba",
+    "surname": "Sukati"
+  },
+  "account_transactions": {
+      "date": "11-12-2019",
+      "amount": 346
+    }
+}
 //return all keys in an object
 function getKeys(obj) {
     var all = {}; 
