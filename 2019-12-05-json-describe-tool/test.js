@@ -11,6 +11,8 @@ var obj = {
     }
 }
 //return all keys in an object
+tree = new buckets.BSTree()
+
 function getKeys(obj) {
     var all = {}; 
     var seen = [];
