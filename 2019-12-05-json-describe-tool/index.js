@@ -19,7 +19,6 @@ function show_banner() {
   );
 }
 function show_keys(level){
-  
    return level;
 }
 
@@ -64,8 +63,7 @@ program
   .alias('-l')
 
 program.parse(process.argv);
-
 if(program.input){
-    ds.describe(program.input,program.level);
+  ds.describe(program.input,program.level);
 }
 
