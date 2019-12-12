@@ -1,20 +1,7 @@
 //test object 
+var buckets = require('buckets-js');
 var obj = {
-    "personal_details": {
-      "name": "Manqoba",
-      "surname": "Sukati"
-    },
-    "account_transactions": [
-      {
-        "date": "11-12-2019",
-        "amount": 346
-      },
-      {
-        "date": "05-12-2019",
-        "amount": 500
-      }
-    ]
-  }
+  "personal_details": {
 //return all keys in an object
 var level_count =  0;
 var test = []
