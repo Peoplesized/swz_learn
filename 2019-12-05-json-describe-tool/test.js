@@ -23,15 +23,18 @@ function getKeys(obj) {
   function checkValue(value, all, seen) {
     if (Array.isArray(value)) return checkArray(value, all, seen);
     if (value instanceof Object) return checkObject(value, all, seen);
+    if(tree.c)
   }
   function checkArray(array, all, seen) {
     if (seen.indexOf(array) >= 0) return;
+    count += 1;
     seen.push(array);
     for (var i = 0, l = array.length; i < l; i++) {
       checkValue(array[i], all, seen);
     }
   }
   function checkObject(obj, all, seen) {
+    count+= 1
     if (seen.indexOf(obj) >= 0) return;
     seen.push(obj);
     var keys = Object.keys(obj);
