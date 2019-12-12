@@ -43,23 +43,5 @@ function getKeys(obj) {
   }
   
 
-  function iterate(obj, stack) {
-    test.push(Object.keys(obj))
-    for (var property in obj) {
-        if (obj.hasOwnProperty(property)) {
-            if (typeof obj[property] == "object") {
-                iterate(obj[property], stack + '.' + property);
-            }
-             else {
-                console.log(property)
-            }
-        }
-    }
-}
-function myOwnKeys(obj){
-  return Object.keys(obj)
-}
-
-var keys = iterate(obj)
-console.log(test)
+console.log(count)
 
