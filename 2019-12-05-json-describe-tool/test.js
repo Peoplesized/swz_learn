@@ -3,8 +3,6 @@ var buckets = require('buckets-js');
 var obj = {
   "personal_details": {
 //return all keys in an object
-var level_count =  0;
-var test = []
 function getKeys(obj) {
     var all = {}; 
     var seen = [];
