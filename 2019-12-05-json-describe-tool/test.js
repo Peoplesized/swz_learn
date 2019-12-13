@@ -1,50 +1,54 @@
-//test object 
-var buckets = require('buckets-js');
-var obj = {
-  "personal_details": {
-    "name": "Manqoba",
-    "surname": "Sukati"
+obj = {
+  type: 'FeatureCollection',
+  simpler: {
+    no: 'problems',
+    to_describe: {
+      objects_all_the_way: 'down',
+      'yet another': {
+        test: 'continuation',
+      },
+    },
+    testing: 'describe tool',
   },
-  "account_transactions": {
-      "date": "11-12-2019",
-      "amount": 346
-    }
-}
+  features: [
+    {
+      type: 'Feature',
+      properties: {
+        id: 0,
+        exceedance_uncertainty: 0.8515777478155229,
+        n_trials: 500,
+        n_positive: 214.5905270803485,
+      },
+      geometry: {
+        type: 'Point',
+        coordinates: [17.631581171470312, 20.61973360070085],
+      },
+    },
+  ],
+};
+
 //return all keys in an object
-tree = new buckets.BSTree()
-
-function getKeys(obj) {
-    var all = {}; 
-    var seen = [];
-    checkValue(obj, all, seen);
-    return Object.keys(all);
-  }
-  
-  function checkValue(value, all, seen) {
-    if (Array.isArray(value)) return checkArray(value, all, seen);
-    if (value instanceof Object) return checkObject(value, all, seen);
-    if(tree.c)
-  }
-  function checkArray(array, all, seen) {
-    if (seen.indexOf(array) >= 0) return;
-    count += 1;
-    seen.push(array);
-    for (var i = 0, l = array.length; i < l; i++) {
-      checkValue(array[i], all, seen);
+count = 0;
+function getKeys2(obj, level = 0) {
+  var keys = [];
+   if (count <= level) {
+    if (obj instanceof Object && !Array.isArray(obj)) {
+      keys = Object.keys(obj);
+      console.log(`--level ${count}`);
+      keys.forEach(k => {
+        console.log(`   - ${k}`);
+      });
+      keys.forEach(k => {
+        getKeys2(obj[k], level);
+      });
+    } else if(Array.isArray(obj)) {
+      keys = Object.keys(obj[0])
+      keys.forEach(k => {
+        console.log(`   - ${k}`);
+      });
     }
+    count++;
   }
-  function checkObject(obj, all, seen) {
-    count+= 1
-    if (seen.indexOf(obj) >= 0) return;
-    seen.push(obj);
-    var keys = Object.keys(obj);
-    for (var i = 0, l = keys.length; i < l; i++) {
-      var key = keys[i];
-      all[key] = true;
-      checkValue(obj[key], all, seen);
-    }
-  }
-  
-
-console.log(count)
-
+  return keys;
+}
+getKeys2(obj, 2)
