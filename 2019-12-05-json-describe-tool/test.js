@@ -29,26 +29,54 @@ obj = {
 
 //return all keys in an object
 count = 0;
-function getKeys2(obj, level = 0) {
+g = {};
+function getKeys(obj) {
   var keys = [];
-   if (count <= level) {
-    if (obj instanceof Object && !Array.isArray(obj)) {
-      keys = Object.keys(obj);
-      console.log(`--level ${count}`);
-      keys.forEach(k => {
-        console.log(`   - ${k}`);
-      });
-      keys.forEach(k => {
-        getKeys2(obj[k], level);
-      });
-    } else if(Array.isArray(obj)) {
-      keys = Object.keys(obj[0])
-      keys.forEach(k => {
-        console.log(`   - ${k}`);
-      });
-    }
-    count++;
+  let temp = count
+  if (obj instanceof Object && !Array.isArray(obj)) {
+    keys = Object.keys(obj);
+    keys.forEach(k => {
+      g[k] ={level: temp, keys: getKeys(obj[k])};
+    });
+  } else if (Array.isArray(obj)) {
+    keys = Object.keys(obj[0]);
+  }
+  count++;
+  if(typeof obj === "string"){
+    keys = typeof obj
   }
   return keys;
 }
-getKeys2(obj, 2)
+
+Array.prototype.remove = function() {
+  var what, a = arguments, L = a.length, ax;
+  while (L && this.length) {
+      what = a[--L];
+      while ((ax = this.indexOf(what)) !== -1) {
+          this.splice(ax, 1);
+      }
+  }
+  return this;
+};
+function getKeysOnLevel(obj, level = 0) {
+  getKeys(obj);
+  temp = Object.keys(g);
+  console.log(`--level ${level}`)
+  for(let i=0; i <= level; i++ ){
+    temp.forEach(k => {
+      if (g[k].level === i) {
+        console.log(`${" ".repeat(i)}${k}`);
+        if((g[k].level + 1 <= level) && Array.isArray(g[k].keys)){
+          g[k].keys.forEach(e => {
+            console.log(`${" ".repeat(i + 1)}-${e}`)
+            delete g[k][e]
+            
+          })
+        }
+      }
+    });    
+  }
+}
+getKeysOnLevel(obj, 2);
+console.log(g)
+
