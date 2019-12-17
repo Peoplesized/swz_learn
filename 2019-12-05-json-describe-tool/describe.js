@@ -1,3 +1,4 @@
+//return all keys in an object
 count = 0;
 g = {};
 function getKeys(obj, parent=NaN) {
@@ -16,11 +17,56 @@ function getKeys(obj, parent=NaN) {
     return obj.length
   }
 }
-function describe(json, level = 1) {
-  console.log(`--keys on all levels`)
-  getKeys(json).forEach( k => {
-    console.log(` -${k}`)
-  })
+
+function find(jsonObj, param) {
+  if( jsonObj !== null && typeof jsonObj == "object" ) {
+      Object.entries(jsonObj).forEach(([key, value]) => {
+          // key is either an array index or object key
+          if(key === param ){
+            return true
+          } else {
+            traverse(value);
+          }
+      });
+  }
+  return false
+}
+
+function getKeysOnLevel(obj, level = 0) {
+  getKeys(obj);
+  temp = Object.keys(g);
+  console.log(`--level ${level}`)
+  for(let i=0; i <= level; i++ ){
+    temp.forEach(k => {
+      if (g[k].level === i) {
+        console.log(`${" ".repeat(i)}${k}`);
+        if((g[k].level + 1 <= level) && Array.isArray(g[k].keys)){
+          g[k].keys.forEach(e => {
+            console.log(`${" ".repeat(i + 1)}-${e}`)
+            delete g[k][e]
+          })
+        }
+      }
+    });    
+  }
+}
+function describe(obj, level = 1) {
+  getKeys(obj);
+  temp = Object.keys(g);
+  console.log(`--level ${level}`)
+  for(let i=0; i <= level; i++ ){
+    temp.forEach(k => {
+      if (g[k].level === i) {
+        console.log(`${" ".repeat(i)}${k}`);
+        if((g[k].level + 1 <= level) && Array.isArray(g[k].keys)){
+          g[k].keys.forEach(e => {
+            console.log(`${" ".repeat(i + 1)}-${e}`)
+            delete g[k][e]
+          })
+        }
+      }
+    });    
+  }
 }
 
 

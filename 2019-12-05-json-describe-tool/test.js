@@ -82,7 +82,7 @@ function getKeysOnLevel(obj, level = 0) {
   console.log(`--level ${level}`)
   for(let i=0; i <= level; i++ ){
     temp.forEach(k => {
-      if (g[k].level <= i) {
+      if (g[k].level === i) {
         console.log(`${" ".repeat(i)}${k}`);
         if((g[k].level + 1 <= level) && Array.isArray(g[k].keys)){
           g[k].keys.forEach(e => {
@@ -95,6 +95,6 @@ function getKeysOnLevel(obj, level = 0) {
   }
 }
 
-getKeysOnLevel(obj, 1)
+getKeysOnLevel(obj, 2)
 console.log(g);
 
