@@ -39,62 +39,23 @@ function getKeys(obj, parent=NaN) {
   var keys = [];
   let temp = count
   if(typeof obj !== "object"){
-    return typeof obj
-  }else if (!Array.isArray(obj)&& obj instanceof Object) {
+    return { "key": obj, type: typeof obj , level: count}
+  }else if (!Array.isArray(obj) && typeof obj === "object") {
     count++;
     keys = Object.keys(obj);
     keys.forEach(k => {
-      g[k] ={ level: temp, keys: getKeys(obj[k],k), parent: parent};
+      if(typeof obj[k] === "object" && !Array.isArray(obj[k])){
+        keys[keys.indexOf(k)] = { "key": k, "children": getKeys(obj[k]) , "type": typeof obj[k], level: temp}
+      } else {
+        keys[keys.indexOf(k)] = { "key": k, "type": typeof obj[k], level: temp}
+      }
     });
     return keys
   } else if (Array.isArray(obj)){
-    return obj.length
+    return { "length": obj.length, "type": "array" , level: temp} 
   }
 }
 
-function find(jsonObj, param) {
-  if( jsonObj !== null && typeof jsonObj == "object" ) {
-      Object.entries(jsonObj).forEach(([key, value]) => {
-          // key is either an array index or object key
-          if(key === param ){
-            return true
-          } else {
-            traverse(value);
-          }
-      });
-  }
-  return false
-}
+console.log(JSON.stringify(getKeys(obj)))
 
-// Array.prototype.remove = function() {
-//   var what, a = arguments, L = a.length, ax;
-//   while (L && this.length) {
-//       what = a[--L];
-//       while ((ax = this.indexOf(what)) !== -1) {
-//           this.splice(ax, 1);
-//       }
-//   }
-//   return this;
-// };
-function getKeysOnLevel(obj, level = 0) {
-  getKeys(obj);
-  temp = Object.keys(g);
-  console.log(`--level ${level}`)
-  for(let i=0; i <= level; i++ ){
-    temp.forEach(k => {
-      if (g[k].level === i) {
-        console.log(`${" ".repeat(i)}${k}`);
-        if((g[k].level + 1 <= level) && Array.isArray(g[k].keys)){
-          g[k].keys.forEach(e => {
-            console.log(`${" ".repeat(i + 1)}-${e}`)
-            delete g[k][e]
-          })
-        }
-      }
-    });    
-  }
-}
-
-getKeysOnLevel(obj, 2)
-console.log(g);
 
