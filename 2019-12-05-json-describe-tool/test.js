@@ -31,31 +31,41 @@ obj = {
     },
   ],
 };
-
-//return all keys in an object
-count = 0;
-g = {};
-function getKeys(obj, parent=NaN) {
+//count = 0;
+function getKeys(obj, count=0, parent=NaN) {
   var keys = [];
   let temp = count
   if(typeof obj !== "object"){
     return { "key": obj, type: typeof obj , level: count}
   }else if (!Array.isArray(obj) && typeof obj === "object") {
-    count++;
     keys = Object.keys(obj);
     keys.forEach(k => {
-      if(typeof obj[k] === "object" && !Array.isArray(obj[k])){
-        keys[keys.indexOf(k)] = { "key": k, "children": getKeys(obj[k]) , "type": typeof obj[k], level: temp}
+      if(typeof obj[k] === "object"){
+        if(Array.isArray(obj[k])){
+          keys[keys.indexOf(k)] = getKeys(obj[k],temp, parent)
+        } else {
+          keys[keys.indexOf(k)] = { "key": k, "children": getKeys(obj[k], count) , "type": typeof obj[k], level: count}
+        }
+        count++;
       } else {
-        keys[keys.indexOf(k)] = { "key": k, "type": typeof obj[k], level: temp}
+        keys[keys.indexOf(k)] = { "key": k, "type": typeof obj[k], level: count}
       }
     });
     return keys
   } else if (Array.isArray(obj)){
-    return { "length": obj.length, "type": "array" , level: temp} 
+    return { "length": obj.length, "type": "array" , level: count, key: parent} 
   }
 }
-
+function display(array, level=0){
+  array.forEach(k => {
+    console.log(`${" ".repeat(k.level)}-${k.key}`)
+    if(level > k.level){
+      if(k.hasOwnProperty("children")){
+        display(k["children"], level)
+      }
+    }
+  })
+}
 console.log(JSON.stringify(getKeys(obj)))
 
 

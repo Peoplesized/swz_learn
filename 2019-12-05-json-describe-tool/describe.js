@@ -19,6 +19,7 @@ function getKeys(obj) {
     return { "length": obj.length, "type": "array" , level: temp} 
   }
 }
+
 function display(array, level=0){
   array.forEach(k => {
     if(level >= k.level){
@@ -34,8 +35,21 @@ function display(array, level=0){
     }
   })
 }
+
 function summarize_key(key){
-  let description = key
+  let description = ''
+  if(!Array.isArray(key) && key.type === "object"){
+    if(key.hasOwnProperty("children")){
+      description = `${key.children.length} keys`
+    } else {
+      description = key.type
+    }
+  } else if(key.type === "array") {
+    description = `[${key.length} elements]`
+  } else {
+    description = key.type
+  }
+  return description
 }
 function display_summary(array, level=0){
   array.forEach(k => {
@@ -44,10 +58,10 @@ function display_summary(array, level=0){
         if(level > k.level)
           console.log(`${" ".repeat(k.level + 2)}-${k.key}:`)
         else
-          console.log(`${" ".repeat(k.level + 2)}-${k.key}`)
+          console.log(`${" ".repeat(k.level + 2)}-${k.key}: ${summarize_key(k)}`)
         display(k["children"], level)
       } else {
-        console.log(`${" ".repeat(k.level + 2)}-${k.key}`)
+        console.log(`${" ".repeat(k.level + 2)}-${k.key}: ${summarize_key(k)}`)
       }
     }
   })
