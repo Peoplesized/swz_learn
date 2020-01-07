@@ -1,0 +1,20 @@
+{
+  "name": "2020-01-07-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build:live",
+    "build": "tsc -p .",
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^13.1.4",
+    "nodemon": "^2.0.2",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
+  }
+}
